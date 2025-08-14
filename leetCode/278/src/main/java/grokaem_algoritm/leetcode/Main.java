@@ -3,25 +3,34 @@ package grokaem_algoritm.leetcode;
 
 public class Main {
     public static void main(String[] args) {
-    int[] arr = new int[]{1,3,5,6};
-        System.out.println("OUTPUT:"+searchInsert(arr,5));
-        System.out.println("OUTPUT:"+searchInsert(arr,2));
-        System.out.println("OUTPUT:"+searchInsert(arr,7));
+        System.out.println("OUTPUT:"+firstBadVersion(5));
+        System.out.println("OUTPUT:"+firstBadVersion(1));
+        System.out.println("OUTPUT:"+firstBadVersion(2126753390));
+
     }
 
-    static int searchInsert(int[] nums, int target) {
+    static int firstBadVersion(int n) {
+        int left = 1;
+        int right = n;
 
-        for (int i = 0; i < nums.length; i++) {
-            System.out.println("Index:"+i+" Value:"+nums[i]);
-            if (nums[i] == target) {
-                return i;
-            }else if (nums[i] > target) {
-                return i;
-            }else if (nums.length == (i+1)){
-                return (i+1);
-            }
+        while (left < right) {
+           int mid = left + (right - left) / 2;
+           if (isBadVersion(mid)) {
+               right = mid;
+           }else {
+               left = mid + 1;
+           }
 
         }
-        return 0;
+        return left;
     }
+
+    static boolean isBadVersion(int version) {
+
+         if (version == 1702766719) {
+            return true;
+        }
+        return false;
+    }
+
 }
